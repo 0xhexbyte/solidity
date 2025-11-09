@@ -42,6 +42,7 @@ contract FundMe {
         // since bytes objest is an array, it needs to be stored in memory
         (bool callSuccess, bytes memory dataReturned) = payable(msg.sender).call{value: address(this).balance("");
         // we can leave the second var blank, saying that we know it returns this data but we don't need it
+        // (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance("");
         require(callSuccess, "Call failed");
         
 
