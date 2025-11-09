@@ -8,8 +8,13 @@ contract FundMe {
 
     uint256 public minUSD = 5*1e18; //can also be writte as 5e18 (1e18)
 
+    address[] public listOfSenders;
+    mapping(address funder => uint256 amtFunded) public addressToAmount;
+
     function fund() public payable{
         require(getConversionRate(msg.value) > minUSD, "Not enough funds");
+        listOfSenders.push(msg.sender);
+        addressToAmount[msg.sender] = addressToAmount[msg.sender] + msg.value;
     }
 
     function getPrice() public view returns (uint256) {
